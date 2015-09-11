@@ -1,0 +1,21 @@
+ls
+mutt
+echo $PATH
+cd ~
+ls
+.profile
+mutt
+ls
+echo $PATH
+echo $PATH
+mutt
+cd /opt/local/bin
+ls
+ls | grep mutt
+mutt
+mutt
+clear
+clear
+cd
+ls
+cd Documents/
