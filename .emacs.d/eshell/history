@@ -19,3 +19,4 @@ clear
 cd
 ls
 cd Documents/
+ansible-vault view softlayer_vault.yml

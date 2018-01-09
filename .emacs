@@ -78,3 +78,13 @@
 
 ;;; fonts
 ; (add-to-list 'default-frame-alist '(font . "Monoid"))
+
+;;; elpy
+(elpy-enable)
+
+;;; autosave
+(require 'real-auto-save)
+(add-hook 'prog-mode-hook 'real-auto-save-mode)
+
+;;; use bash
+(setq shell-file-name "/bin/bash")
