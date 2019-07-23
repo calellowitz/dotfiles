@@ -20,3 +20,10 @@ cd
 ls
 cd Documents/
 ansible-vault view softlayer_vault.yml
+echo $PATh
+echo $PATH
+ag
+ls
+echo $PATH
+racket
+racket

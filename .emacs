@@ -14,12 +14,18 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; Inherit Path
+(exec-path-from-shell-initialize)
+
 ;;;Use Monokai
 
 (load-theme 'monokai t)
 
 ;;;Macports commands for ehsell
-(setenv "PATH" (concat "opt/local/bin:opt/local/sbin:" (getenv "PATH")))
+(setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:" (getenv "PATH")))
+
+;;;Homebrew commands for ehsell
+(setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
 
 ;;;AucTex Stuff
 ;; Adds stuff to my PATH (LaTeX, etc) 
@@ -57,13 +63,17 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;; aspell
-(setq ispell-program-name "/opt/local/bin/aspell")
+(setq ispell-program-name "/usr/local/bin/aspell")
 
 ;;; maybe colors
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Mutt support.
 (setq auto-mode-alist (append '(("Users/temp/.mutt/temp/" . message-mode)) auto-mode-alist))
+(add-hook 'message-mode-hook 'visual-line-mode)
+(add-hook 'message-mode-hook 'flyspell-mode)
+
+;; Org mode composition help
 (add-hook 'message-mode-hook 'visual-line-mode)
 (add-hook 'message-mode-hook 'flyspell-mode)
 
@@ -81,6 +91,12 @@
 
 ;;; elpy
 (elpy-enable)
+;; use ag instead of grep for elpy search
+(defun ag-search-at-point ()
+  "search project for symbol at point"
+  (interactive)
+  (ag-project (thing-at-point 'symbol)))
+(define-key elpy-mode-map (kbd "C-c C-s") 'ag-search-at-point)
 
 ;;; autosave
 (require 'real-auto-save)
@@ -88,3 +104,21 @@
 
 ;;; use bash
 (setq shell-file-name "/bin/bash")
+
+;;; python imports
+(add-hook 'python-mode-hook 'importmagic-mode)
+(with-eval-after-load 'importmagic
+  (define-key importmagic-mode-map (kbd "C-c C-a") 'importmagic-fix-symbol-at-point))
+
+;;; indentation stuff
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq c-basic-indent 4)
+(setq js-indent-level 2)
+
+;; ag mode
+(setq ag-reuse-buffers 't)
+
+;; midnight
+(require 'midnight)
+(midnight-delay-set 'midnight-delay "9:00pm")
