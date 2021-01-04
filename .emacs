@@ -74,8 +74,8 @@
 (add-hook 'message-mode-hook 'flyspell-mode)
 
 ;; Org mode composition help
-(add-hook 'message-mode-hook 'visual-line-mode)
-(add-hook 'message-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
 
 ;;; ChucK?
 (require 'chuck-mode)
@@ -122,3 +122,6 @@
 ;; midnight
 (require 'midnight)
 (midnight-delay-set 'midnight-delay "9:00pm")
+
+;; dired settings
+(put 'dired-find-alternate-file 'disabled nil)
